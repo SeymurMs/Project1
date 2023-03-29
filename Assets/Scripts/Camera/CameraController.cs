@@ -15,12 +15,11 @@ public class CameraController : MonoBehaviour
     float _rotationX;
     float _rotationY;
 
-    Camera _camera;
-
+    [SerializeField] Transform _camera;
+    [SerializeField] Transform _orientation;
 
     private void Start()
     {
-        _camera = GetComponentInChildren<Camera>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -28,8 +27,8 @@ public class CameraController : MonoBehaviour
     {
         ControlCameraInput();
 
-        _camera.transform.localRotation = Quaternion.Euler(_rotationX, 0f, 0f);
-        transform.localRotation = Quaternion.Euler(0f, _rotationY, 0f);
+        _camera.transform.rotation = Quaternion.Euler(_rotationX, _rotationY, 0f);
+        _orientation.rotation = Quaternion.Euler(0f, _rotationY, 0f);
     }
     void ControlCameraInput()
     {
